@@ -1,1 +1,5 @@
-WeaponOut is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Suitable for single and multi mode.
+The switch is on the upper left corner of the inventory interface!
+
+适配单人和多人模式.
+开关在背包界面的左上角!
