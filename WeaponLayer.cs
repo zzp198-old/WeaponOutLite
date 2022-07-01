@@ -61,10 +61,10 @@ public static class DrawTool
         bool isYoyo = false;
         if (heldItem.shoot != ProjectileID.None)
         {
-            if (heldItem.DamageType == DamageClass.Melee && heldItem.noMelee)
+            if (heldItem.DamageType.CountsAsClass(DamageClass.Melee) && heldItem.noMelee)
             {
                 if (Main.projectile.Where(t => t.active)
-                    .Any(t => t.owner == drawPlayer.whoAmI && t.DamageType == DamageClass.Melee)) return;
+                    .Any(t => t.owner == drawPlayer.whoAmI && t.CountsAsClass(DamageClass.Melee))) return;
             }
 
             //  YOYO is aiStyle 99
@@ -254,7 +254,7 @@ public static class DrawTool
             }
             else if (gWidth >= gHeight * 1.2f && !isAStaff)
             {
-                if (heldItem.noUseGraphic && heldItem.DamageType == DamageClass.Melee)
+                if (heldItem.noUseGraphic && heldItem.CountsAsClass(DamageClass.Melee))
                 {
                     //|                 
                     //|    ####         

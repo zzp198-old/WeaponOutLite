@@ -50,7 +50,7 @@ public class WOPlayer : ModPlayer
         int playerBodyFrameNum = Player.bodyFrame.Y / Player.bodyFrame.Height;
         if (heldItem.useStyle == 5
             && weaponTex.Width >= weaponTex.Height * 1.2f
-            && (!heldItem.noUseGraphic || heldItem.DamageType != DamageClass.Melee)
+            && (!heldItem.noUseGraphic || !heldItem.DamageType.CountsAsClass(DamageClass.Melee))
             && larger >= 45
            )
         {
