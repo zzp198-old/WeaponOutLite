@@ -10,7 +10,7 @@ using Terraria.ID;
 
 namespace WeaponOut;
 
-public class WOPlayerDrawLayer1 : PlayerDrawLayer
+public class WeaponLayer1 : PlayerDrawLayer
 {
     public override Position GetDefaultPosition()
     {
@@ -23,7 +23,7 @@ public class WOPlayerDrawLayer1 : PlayerDrawLayer
     }
 }
 
-public class WOPlayerDrawLayer2 : PlayerDrawLayer
+public class WeaponLayer2 : PlayerDrawLayer
 {
     public override Position GetDefaultPosition()
     {

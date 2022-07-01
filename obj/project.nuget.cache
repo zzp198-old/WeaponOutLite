@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hXm0Re2bWZEqNrCxdkSs7O6lwk0JrxKWA2UuvedJAOYNupNnSIyJDs0mgHggVcPM/TLVxr3Kt3EqBMgKadk60Q==",
+  "dgSpecHash": "4fg+eFaRn9SYEstu1DTsy3fGKFuUWVbCeg8MoxcJoPG4CJpuq0oZnimOVMoYZHKzhhIcVDvsPdlfYtPdg4tV7A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\WeaponOut\\WeaponOut.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\RiderProjects\\WeaponOut\\WeaponOut.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],
