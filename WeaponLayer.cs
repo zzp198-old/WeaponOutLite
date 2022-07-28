@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Terraria.UI;
 
 namespace WeaponOut;
 
@@ -77,47 +78,31 @@ public static class DrawTool
         }
 
         //item texture
-        Texture2D weaponTex = weaponTex = TextureAssets.Item[heldItem.type].Value;
+        Texture2D weaponTex = TextureAssets.Item[heldItem.type].Value;
+
         if (weaponTex == null) return; //no texture to item so ignore too
-        int gWidth = weaponTex.Width;
-        int gHeight = weaponTex.Height;
-
         //does the item have an animation? No vanilla weapons do
-        Rectangle? sourceRect = null;
-        if (heldItem.ModItem != null)
-        {
-            if (Main.itemAnimations[heldItem.type] != null) // in the case of modded weapons with animations...
-            {
-                //get local player frame counting
-                var p = drawPlayer.GetModPlayer<WOPlayer>();
-                int frameCount = Main.itemAnimations[heldItem.type].FrameCount;
-                int frameCounter = Main.itemAnimations[heldItem.type].TicksPerFrame * 2;
+        Rectangle? sourceRect = Main.itemAnimations[heldItem.type] == null
+            ? weaponTex.Frame()
+            : Main.itemAnimations[heldItem.type].GetFrame(weaponTex);
 
-                //add them up
-                if (Main.time % frameCounter == 0)
-                {
-                    p.WeaponFrame++;
-                    if (p.WeaponFrame >= frameCount) p.WeaponFrame = 0;
-                }
-
-                //set frame on source
-                gHeight /= frameCount;
-                sourceRect = new Rectangle(0, gHeight * p.WeaponFrame, gWidth, gHeight);
-            }
-        }
+        int gWidth = sourceRect.Value.Width;
+        int gHeight = sourceRect.Value.Height;
 
         //get draw location of player
         int drawX = (int)(drawPlayer.MountedCenter.X - Main.screenPosition.X);
         int drawY = (int)(drawPlayer.MountedCenter.Y - Main.screenPosition.Y + drawPlayer.gfxOffY) - 3;
         //get the lighting on the player's tile
+
         Color lighting = Lighting.GetColor(
             (int)((drawInfo.Position.X + drawPlayer.width / 2f) / 16f),
             (int)((drawInfo.Position.Y + drawPlayer.height / 2f) / 16f));
-        //get item alpha (like starfury) then player stealth and alpha (inviciblity etc.)
-        lighting = drawPlayer.GetImmuneAlpha(heldItem.GetAlpha(lighting) * drawPlayer.stealth, 0);
-
         float scale = heldItem.scale;
         if (isYoyo) scale *= 0.6f;
+
+        //get item alpha (like starfury) then player stealth and alpha (inviciblity etc.)
+        ItemSlot.GetItemLight(ref lighting, ref scale, heldItem);
+        lighting = drawPlayer.GetImmuneAlpha(heldItem.GetAlpha(lighting) * drawPlayer.stealth, 0);
 
         //standard items
         SpriteEffects spriteEffects = SpriteEffects.None;
