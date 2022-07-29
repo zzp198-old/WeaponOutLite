@@ -173,7 +173,7 @@ public static class DrawTool
             //|       ##  ##    
             //|         ##      
             //Items, daggers and other throwables lie below 28 and are easily held in the hand
-            
+
             if ((larger < 28 && !(heldItem.DamageType == DamageClass.Magic)) || //nonmagic weapons
                 (larger <= 32 && heldItem.shoot != 0) || //larger for throwing weapons
                 (larger <= 24 && heldItem.DamageType != DamageClass.Magic)) //only smallest magic weapons
