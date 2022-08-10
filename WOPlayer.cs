@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.ID;
 
 namespace WeaponOut;
 
@@ -27,7 +28,7 @@ public class WOPlayer : ModPlayer
 
     public override void PostUpdate()
     {
-        if (Main.netMode == 2) return; // Oh yeah, server calls this so don't pls
+        if (Main.netMode == NetmodeID.Server) return; // Oh yeah, server calls this so don't pls
 
         //change idle pose for player using a heavy weapon
         //copypasting from drawPlayerItem

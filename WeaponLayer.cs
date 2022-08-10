@@ -158,6 +158,9 @@ public static class DrawTool
     {
         HoldType holdType = HoldType.None;
 
+
+        Console.WriteLine(heldItem.useStyle);
+
         #region AutoPicker
 
         if (heldItem.useStyle == 1 || //swing
@@ -218,7 +221,8 @@ public static class DrawTool
         }
 
         if (heldItem.useStyle == 4 || //hold up
-            heldItem.useStyle == 5) //hold out
+            heldItem.useStyle == 5 || //hold out
+            heldItem.useStyle == 13) // shortword
         {
             bool isAStaff = Item.staff[heldItem.type];
             //staves, guns and bows
