@@ -18,9 +18,9 @@ namespace WeaponOut
             // itemCustomizer = ModLoader.GetMod("ItemCustomizer");
         }
 
-        private void OnDrawInventory(On.Terraria.Main.orig_DrawInventory orig, Main self)
+        private void OnDrawInventory(On.Terraria.Main.orig_DrawInventory invoke, Main self)
         {
-            orig(self);
+            invoke(self);
             var texture = Terraria.GameContent.TextureAssets.InventoryTickOn.Value;
             var hoverText = "WeaponOut: " + Lang.inter[59];
             var position = new Vector2(23, 4);

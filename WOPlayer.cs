@@ -10,8 +10,7 @@ namespace WeaponOut;
 
 public class WOPlayer : ModPlayer
 {
-    public bool Show;
-    public int WeaponFrame;
+    public bool Show = true;
 
     public override void SaveData(TagCompound tag)
     {
@@ -22,7 +21,7 @@ public class WOPlayer : ModPlayer
     {
         if (tag.ContainsKey("Show"))
         {
-            this.Show = tag.GetBool("Show");
+            Show = tag.GetBool("Show");
         }
     }
 
@@ -31,14 +30,13 @@ public class WOPlayer : ModPlayer
         if (Main.netMode == NetmodeID.Server) return; // Oh yeah, server calls this so don't pls
 
         //change idle pose for player using a heavy weapon
-        //copypasting from drawPlayerItem
-        Item heldItem = Player.inventory[Player.selectedItem];
+        var heldItem = Player.inventory[Player.selectedItem];
         if (heldItem == null || heldItem.type == 0 || heldItem.holdStyle != 0)
             return; //no item so nothing to show
         Texture2D weaponTex = weaponTex = TextureAssets.Item[heldItem.type].Value;
         if (weaponTex == null) return; //no texture to item so ignore too
-        float itemWidth = weaponTex.Width * heldItem.scale;
-        float itemHeight = weaponTex.Height * heldItem.scale;
+        var itemWidth = weaponTex.Width * heldItem.scale;
+        var itemHeight = weaponTex.Height * heldItem.scale;
         if (heldItem.ModItem != null)
         {
             if (Main.itemAnimations[heldItem.type] != null)
@@ -47,8 +45,8 @@ public class WOPlayer : ModPlayer
             }
         }
 
-        float larger = Math.Max(itemWidth, itemHeight);
-        int playerBodyFrameNum = Player.bodyFrame.Y / Player.bodyFrame.Height;
+        var larger = Math.Max(itemWidth, itemHeight);
+        var playerBodyFrameNum = Player.bodyFrame.Y / Player.bodyFrame.Height;
         if (heldItem.useStyle == 5
             && weaponTex.Width >= weaponTex.Height * 1.2f
             && (!heldItem.noUseGraphic || !heldItem.DamageType.CountsAsClass(DamageClass.Melee))
@@ -61,7 +59,7 @@ public class WOPlayer : ModPlayer
 
     public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
     {
-        ModPacket packet = Mod.GetPacket();
+        var packet = Mod.GetPacket();
         packet.Write((byte)Player.whoAmI);
         packet.Write(Show);
         packet.Send(toWho, fromWho);

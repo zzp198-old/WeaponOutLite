@@ -1,4 +1,5 @@
-This mod has only one function, which is to display weapons.
+This mod has only one function!
+Will not change the weapon hitbox, not change the damage of the weapon, only display.
 No new items added.
 
 Suitable for single and multi mode.
@@ -7,7 +8,8 @@ The switch is on the upper left corner of the inventory interface!
 Original mod author: Flashkirby99
 1.4 Porting: zzp198
 
-这个mod只有一个功能，那就是展示武器。
+这个mod只有一个功能。
+不会改变命中框，不会改变任何伤害，仅仅只有展示效果。
 并没有新加其他内容。
 
 适配单人和多人模式.

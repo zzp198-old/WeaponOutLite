@@ -18,6 +18,11 @@ public class WeaponLayer1 : PlayerDrawLayer
         return new AfterParent(PlayerDrawLayers.HeldItem);
     }
 
+    public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+    {
+        return DrawTool.DefaultVisibility(drawInfo);
+    }
+
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
         DrawTool.InterDraw(ref drawInfo, false);
@@ -31,6 +36,11 @@ public class WeaponLayer2 : PlayerDrawLayer
         return new AfterParent(PlayerDrawLayers.HairBack);
     }
 
+    public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+    {
+        return DrawTool.DefaultVisibility(drawInfo);
+    }
+
     protected override void Draw(ref PlayerDrawSet drawInfo)
     {
         DrawTool.InterDraw(ref drawInfo, true);
@@ -39,6 +49,62 @@ public class WeaponLayer2 : PlayerDrawLayer
 
 public static class DrawTool
 {
+    public static bool DefaultVisibility(PlayerDrawSet drawInfo)
+    {
+        var config = ModContent.GetInstance<WOConfig>();
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Default))
+        {
+            return config.Default;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Generic))
+        {
+            return config.Generic;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Magic))
+        {
+            return config.Magic;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Melee))
+        {
+            return config.Melee;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Ranged))
+        {
+            return config.Ranged;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Summon))
+        {
+            return config.Summon;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.Throwing))
+        {
+            return config.Throwing;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.MagicSummonHybrid))
+        {
+            return config.MagicSummonHybrid;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.MeleeNoSpeed))
+        {
+            return config.MeleeNoSpeed;
+        }
+
+        if (drawInfo.heldItem.CountsAsClass(DamageClass.SummonMeleeSpeed))
+        {
+            return config.SummonMeleeSpeed;
+        }
+
+        return config.NotWeapon;
+    }
+
     public static void InterDraw(ref PlayerDrawSet drawInfo, bool drawOnBack)
     {
         if (Main.gameMenu) return;
@@ -413,29 +479,29 @@ public static class DrawTool
         WeaponDrawInfo.drawGlowLayer(data, drawPlayer, heldItem, drawInfo);
     }
 
-    // private static int ItemCustomizerGetShader(Mod mod, Item item)
-    // {
-    //     if (!Main.dedServ)
-    //     {
-    //         try
-    //         {
-    //           
-    //             GlobalItem cii = item.GetGlobalItem(mod, "CustomizerItem");
-    //
-    //             // The field we're looking for
-    //             var shaderIDInfo = cii.GetType().GetField("shaderID");
-    //
-    //             // Check this field on this class
-    //             int shaderID = (int)shaderIDInfo.GetValue(cii);
-    //
-    //             // We got this
-    //             return shaderID;
-    //         }
-    //         catch
-    //         {
-    //         }
-    //     }
-    //
-    //     return 0;
-    // }
+// private static int ItemCustomizerGetShader(Mod mod, Item item)
+// {
+//     if (!Main.dedServ)
+//     {
+//         try
+//         {
+//           
+//             GlobalItem cii = item.GetGlobalItem(mod, "CustomizerItem");
+//
+//             // The field we're looking for
+//             var shaderIDInfo = cii.GetType().GetField("shaderID");
+//
+//             // Check this field on this class
+//             int shaderID = (int)shaderIDInfo.GetValue(cii);
+//
+//             // We got this
+//             return shaderID;
+//         }
+//         catch
+//         {
+//         }
+//     }
+//
+//     return 0;
+// }
 }
