@@ -1,16 +1,4 @@
-This mod has only one function!
-Will not change the weapon hitbox, not change the damage of the weapon, only display.
-No new items added.
+WeaponOut Lite is based on the original purpose of WeaponOut before it ballooned into extra content.
+This version is just for the vanity effect without any content provided in the main mod.
 
-Suitable for single and multi mode.
-The switch is on the upper left corner of the inventory interface!
-
-Original mod author: Flashkirby99
-1.4 Porting: zzp198
-
-这个mod只有一个功能。
-不会改变命中框，不会改变任何伤害，仅仅只有展示效果。
-并没有新加其他内容。
-
-适配单人和多人模式.
-开关在背包界面的左上角!
+DM me to delete it if you want to publish "WeaponOut".

@@ -163,7 +163,7 @@ public static class DrawTool
         Color lighting = Lighting.GetColor(
             (int)((drawInfo.Position.X + drawPlayer.width / 2f) / 16f),
             (int)((drawInfo.Position.Y + drawPlayer.height / 2f) / 16f));
-        float scale = heldItem.scale;
+        float scale = heldItem.scale * (ModContent.GetInstance<WOConfig>().Scale / 100f);
         if (isYoyo) scale *= 0.6f;
 
         //get item alpha (like starfury) then player stealth and alpha (inviciblity etc.)
@@ -223,9 +223,6 @@ public static class DrawTool
         PlayerDrawSet drawInfo)
     {
         HoldType holdType = HoldType.None;
-
-
-        Console.WriteLine(heldItem.useStyle);
 
         #region AutoPicker
 
