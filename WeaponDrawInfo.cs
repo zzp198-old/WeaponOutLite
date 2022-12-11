@@ -108,7 +108,7 @@ namespace WeaponOut
         {
             if (heldItem.glowMask != -1)
             {
-                Color glowLighting = new Microsoft.Xna.Framework.Color(250, 250, 250, heldItem.alpha);
+                Color glowLighting = new Color(250, 250, 250, heldItem.alpha);
                 glowLighting = drawPlayer.GetImmuneAlpha(heldItem.GetAlpha(glowLighting) * drawPlayer.stealth, 0);
                 DrawData glowData = new DrawData(
                     Terraria.GameContent.TextureAssets.GlowMask[heldItem.glowMask].Value,
@@ -124,12 +124,7 @@ namespace WeaponOut
             }
         }
 
-        internal static DrawData modDraw_HandWeapon(DrawData data, Player p, float length, float width)
-        {
-            return modDraw_HandWeapon(data, p, length, width, false);
-        }
-
-        internal static DrawData modDraw_HandWeapon(DrawData data, Player p, float length, float width, bool isYoyo)
+        internal static DrawData modDraw_HandWeapon(DrawData data, Player p, float length, float width, bool isYoyo = false)
         {
             int playerBodyFrameNum = p.bodyFrame.Y / p.bodyFrame.Height;
             if (isYoyo)

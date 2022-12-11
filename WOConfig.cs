@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Config;
 
 namespace WeaponOut;

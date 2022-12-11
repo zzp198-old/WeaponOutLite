@@ -33,7 +33,7 @@ public class WOPlayer : ModPlayer
         var heldItem = Player.inventory[Player.selectedItem];
         if (heldItem == null || heldItem.type == 0 || heldItem.holdStyle != 0)
             return; //no item so nothing to show
-        Texture2D weaponTex = weaponTex = TextureAssets.Item[heldItem.type].Value;
+        Texture2D weaponTex = TextureAssets.Item[heldItem.type].Value;
         if (weaponTex == null) return; //no texture to item so ignore too
         var itemWidth = weaponTex.Width * heldItem.scale;
         var itemHeight = weaponTex.Height * heldItem.scale;
@@ -55,13 +55,5 @@ public class WOPlayer : ModPlayer
         {
             if (playerBodyFrameNum == 0) Player.bodyFrame.Y = 10 * Player.bodyFrame.Height;
         }
-    }
-
-    public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
-    {
-        var packet = Mod.GetPacket();
-        packet.Write((byte)Player.whoAmI);
-        packet.Write(Show);
-        packet.Send(toWho, fromWho);
     }
 }

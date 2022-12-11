@@ -1,4 +1,5 @@
 displayName = zzp198's WeaponOut
 author = zzp198, Flashkirby99
-version = 1.3
+version = 1.4
 homepage = https://github.com/zzp198/WeaponOut
+side = Client

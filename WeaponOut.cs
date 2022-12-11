@@ -40,13 +40,6 @@ namespace WeaponOut
                 if (Main.mouseLeft && Main.mouseLeftRelease)
                 {
                     Main.LocalPlayer.GetModPlayer<WOPlayer>().Show = !Main.LocalPlayer.GetModPlayer<WOPlayer>().Show;
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
-                    {
-                        ModPacket packet = Instance.GetPacket();
-                        packet.Write((byte)Main.myPlayer);
-                        packet.Write(Main.LocalPlayer.GetModPlayer<WOPlayer>().Show);
-                        packet.Send();
-                    }
                 }
             }
 
@@ -57,20 +50,6 @@ namespace WeaponOut
         {
             On.Terraria.Main.DrawInventory -= OnDrawInventory;
             Instance = null;
-        }
-
-        public override void HandlePacket(BinaryReader reader, int whoAmI)
-        {
-            var id = reader.ReadByte();
-            var show = reader.ReadBoolean();
-            Main.player[id].GetModPlayer<WOPlayer>().Show = show;
-            if (Main.dedServ)
-            {
-                ModPacket packet = Instance.GetPacket();
-                packet.Write(id);
-                packet.Write(show);
-                packet.Send();
-            }
         }
     }
 }

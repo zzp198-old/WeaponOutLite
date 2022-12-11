@@ -111,7 +111,10 @@ public static class DrawTool
         //get player player
         var drawPlayer = drawInfo.drawPlayer;
         //hide if dead, stoned etc.
-        if (!drawPlayer.GetModPlayer<WOPlayer>().Show) return;
+        if (!Main.LocalPlayer.GetModPlayer<WOPlayer>().Show)
+        {
+            return; // hide/show order by LocalPlayer!
+        }
         if (!drawPlayer.active || drawPlayer.dead || drawPlayer.stoned) return;
         try
         {
@@ -226,9 +229,7 @@ public static class DrawTool
 
         #region AutoPicker
 
-        if (heldItem.useStyle == 1 || //swing
-            heldItem.useStyle == 2 || //eat
-            heldItem.useStyle == 3) //stab
+        if (heldItem.useStyle is 1 or 2 or 3) //swing eat stab
         {
             //|       ######        
             //|       ##  ##        
@@ -240,8 +241,8 @@ public static class DrawTool
             //|         ##      
             //Items, daggers and other throwables lie below 28 and are easily held in the hand
 
-            if ((larger < 28 && !(heldItem.DamageType == DamageClass.Magic)) || //nonmagic weapons
-                (larger <= 32 && heldItem.shoot != 0) || //larger for throwing weapons
+            if ((larger < 28 && !heldItem.CountsAsClass<MagicDamageClass>()) || //nonmagic weapons
+                (larger <= 32 && heldItem.shoot != ProjectileID.None) || //larger for throwing weapons
                 (larger <= 24 && heldItem.DamageType != DamageClass.Magic)) //only smallest magic weapons
             {
                 if (drawPlayer.grapCount > 0) return; // can't see while grappling
@@ -260,9 +261,7 @@ public static class DrawTool
             //They are worn on the waist, and react to falling! Except when disabled
             //This also amusingly applies to ducks, axes and rockfish
             //But shouldn't apply to pickaxes, except when they are also not pickaxes
-            else if (larger <= 48 &&
-                     (heldItem.pick <= 0 ||
-                      (heldItem.pick > 0 && heldItem.axe > 0)))
+            else if (larger <= 48 && (heldItem.pick <= 0 || (heldItem.pick > 0 && heldItem.axe > 0)))
             {
                 if (!drawOnBack) return;
                 holdType = HoldType.Waist;
@@ -283,9 +282,7 @@ public static class DrawTool
             }
         }
 
-        if (heldItem.useStyle == 4 || //hold up
-            heldItem.useStyle == 5 || //hold out
-            heldItem.useStyle == 13) // shortword
+        if (heldItem.useStyle is 4 or 5 or 13) //hold up/down shortword
         {
             bool isAStaff = Item.staff[heldItem.type];
             //staves, guns and bows
@@ -365,7 +362,7 @@ public static class DrawTool
                         if (isYoyo)
                         {
                             //sam (?why did i write sam? maybe same?)
-                            data = WeaponDrawInfo.modDraw_HandWeapon(data, drawPlayer, larger, lesser, isYoyo);
+                            data = WeaponDrawInfo.modDraw_HandWeapon(data, drawPlayer, larger, lesser, true);
                         }
                         else
                         {
